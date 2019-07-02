@@ -1,0 +1,40 @@
+{
+  "land_cover_classification:1": {
+    "n_clusters": 6,
+    "n_iterations": 10,
+    "n_sieve_pixels": 64
+  },
+  "sentinelhub-landsat8-aoiclipped:1": {
+    "bbox": null,
+    "time": null,
+    "limit": 1,
+    "intersects": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            -8.877645,
+            40.152078
+          ],
+          [
+            -8.871337,
+            40.139659
+          ],
+          [
+            -8.849105,
+            40.141048
+          ],
+          [
+            -8.860468,
+            40.152447
+          ],
+          [
+            -8.877645,
+            40.152078
+          ]
+        ]
+      ]
+    },
+    "zoom_level": 17
+  }
+}
