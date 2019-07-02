@@ -1,0 +1,381 @@
+{
+  "error": null,
+  "data": {
+    "id": "96b4c117-ab4d-44cf-afb1-0922d91031d4",
+    "displayId": "96b4c117",
+    "createdAt": "2019-07-02T22:21:26.877Z",
+    "updatedAt": "2019-07-02T22:24:05.398Z",
+    "status": "RUNNING",
+    "name": null,
+    "startedAt": "2019-07-02T22:21:27Z",
+    "finishedAt": null,
+    "inputs": {
+      "land_cover_classification:1": {
+        "n_clusters": 6,
+        "n_iterations": 10,
+        "n_sieve_pixels": 64
+      },
+      "sentinelhub-landsat8-aoiclipped:1": {
+        "bbox": null,
+        "time": null,
+        "limit": 1,
+        "intersects": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -8.877645,
+                40.152078
+              ],
+              [
+                -8.871337,
+                40.139659
+              ],
+              [
+                -8.849105,
+                40.141048
+              ],
+              [
+                -8.860468,
+                40.152447
+              ],
+              [
+                -8.877645,
+                40.152078
+              ]
+            ]
+          ]
+        },
+        "zoom_level": 17
+      }
+    },
+    "mode": "DEFAULT",
+    "tasks": [
+      {
+        "id": "3344b712-aa9a-4cdb-94ae-7f3e379b7369",
+        "displayId": "3344b712",
+        "createdAt": "2019-07-02T22:21:26.879Z",
+        "updatedAt": "2019-07-02T22:23:23.378Z",
+        "name": "sentinelhub-landsat8-aoiclipped:1",
+        "block": {
+          "id": "e0b133ae-7b9c-435c-99ac-c4527cc8d9cf",
+          "createdAt": "2019-04-18T14:23:16.339Z",
+          "updatedAt": "2019-05-15T09:21:01.698Z",
+          "name": "sentinelhub-landsat8-aoiclipped",
+          "displayName": "Landsat-8 Level 1 (TOA) AOI clipped",
+          "description": "This block provides Landsat-8 imagery clipped to all webmercator tiles intersecting a given bounding box or AOI on a given zoom level. The part of the image that does not intersect with these tiles will be black. The block outputs a single GeoTIFF file and will store the AOI within the output feature geometry.",
+          "containerUrl": "registry.up42.dev/marketplace/sentinelhub-landsat8-aoiclipped:mPfsS4EK6OnNlW9oJP2SXCbIhoTWOYJ1xfkpD5oS",
+          "inputCapabilities": [],
+          "outputCapabilities": [
+            {
+              "name": "up42.data.aoiclipped"
+            }
+          ],
+          "provider": "Sentinel Hub",
+          "tags": [
+            "MSI",
+            "Landsat",
+            "Imagery"
+          ],
+          "isPublic": true,
+          "isValid": true,
+          "parameters": {
+            "bbox": {
+              "type": "string",
+              "default": null
+            },
+            "time": {
+              "type": "dateRange",
+              "default": null
+            },
+            "limit": {
+              "type": "number",
+              "default": 1
+            },
+            "intersects": {
+              "type": "geometry"
+            },
+            "zoom_level": {
+              "type": "number",
+              "default": 17
+            }
+          },
+          "isRunnableByUser": true,
+          "type": "DATA",
+          "isDryRunSupported": true,
+          "availableVersions": [
+            "0.4.1",
+            "0.4.2",
+            "0.4.3",
+            "0.4.4",
+            "0.4.5",
+            "0.4.6",
+            "0.4.8",
+            "0.5.0",
+            "0.8.0",
+            "0.8.2",
+            "0.8.3",
+            "0.9.0",
+            "0.9.1",
+            "0.9.2",
+            "0.9.3",
+            "0.9.4",
+            "0.9.5",
+            "0.9.6",
+            "0.9.8",
+            "1.0.0",
+            "1.0.10",
+            "1.0.11",
+            "1.0.13",
+            "1.0.14",
+            "1.0.15",
+            "1.0.16",
+            "1.0.17",
+            "1.0.18",
+            "1.0.19",
+            "1.0.2",
+            "1.0.20",
+            "1.0.21",
+            "1.0.22",
+            "1.0.23",
+            "1.0.24",
+            "1.0.25",
+            "1.0.26",
+            "1.0.27",
+            "1.0.28",
+            "1.0.3",
+            "1.0.30",
+            "1.0.31",
+            "1.0.4",
+            "1.0.5",
+            "1.0.6",
+            "1.0.7",
+            "1.0.8",
+            "1.0.9"
+          ],
+          "version": "1.0.7",
+          "metadata": {
+            "id": "b9730cac-3ec0-45ed-be7e-89f81111b607",
+            "createdAt": "2019-05-15T09:21:01.699Z",
+            "updatedAt": "2019-05-15T09:21:01.699Z",
+            "overview": "Landsat 8 is a multi-spectral imaging mission, capturing visible, infrared bands, and thermal bands since February 2013. A Pan-sharpening band is available for visual spectral bands as well. This block is a L1 (TOA) data block that is AOI-clipped. Only Tier 1 scenes i.e. those with the highest available data quality which are considered suitable for time-series analysis are delivered. \n\n Landsat 8 is a unique resource for those who work in agriculture, geology, forestry, regional planning, education, mapping, and global change research.\n\n All Landsat 8 data are available from the start of imagery capture. All new acquisitions are made available each day, often within hours of production. \n\n  \n  | Name  |  Description               | Resolution | \n  |-------|----------------------------|------------|\n  | B01   | Ultra Blue                 | 30m        | \n  | B02   | Blue                       | 30m        | \n  | B03   | Green                      | 30m        | \n  | B04   | Red                        | 30m        | \n  | B05   | Near Infrared (NIR)        | 30m        | \n  | B06   | Shortwave Infrared (SWIR)  | 30m        | \n  | B07   | Shortwave Infrared (SWIR)  | 30m        |\n  | B08   | Panchromatic               | 15m        | \n  | B09   | Cirrus                     | 30m        | \n  | B10   | Thermal Infrared (TIRS)    | 30m        | \n  | B11   | Thermal Infrared (TIRS)    | 30m        | \n  \n  \n",
+            "termsAndConditionsUrl": "https://sentinel-hub.com/tos",
+            "iconUrl": "https://storage.googleapis.com/metadata-interstellar-staging/SentinelHub/Landsat8/Landsat-8-Avatar.png",
+            "pricingStrategy": {
+              "id": "e82b4748-53a3-4131-bd25-f5dd45dabecd",
+              "createdAt": "2019-05-15T09:21:01.700Z",
+              "updatedAt": "2019-05-15T09:21:01.700Z",
+              "type": "MEGAPIXEL_OUTPUT",
+              "credits": 1,
+              "displayId": "e82b4748"
+            },
+            "blockMarketplaceSampleData": [
+              {
+                "id": "724f967f-c53b-46e8-be21-688d6e35fb5e",
+                "createdAt": "2019-05-15T09:21:01.700Z",
+                "updatedAt": "2019-05-15T09:21:01.700Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/SentinelHub/Landsat8/2018-05-30%2C%20Landsat%208%20USGS%2C%20True%20color.png",
+                "type": "IMAGE",
+                "displayId": "724f967f"
+              },
+              {
+                "id": "7d3208c4-1d2f-4186-8221-6b13a46a3b23",
+                "createdAt": "2019-05-15T09:21:01.701Z",
+                "updatedAt": "2019-05-15T09:21:01.701Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/SentinelHub/Landsat8/2018-05-30%2C%20Landsat%208%20USGS%2C%20True%20color-clipped.png",
+                "type": "IMAGE",
+                "displayId": "7d3208c4"
+              },
+              {
+                "id": "0bafd1d2-5bf9-4d7d-8fbd-22ecde5d3069",
+                "createdAt": "2019-05-15T09:21:01.701Z",
+                "updatedAt": "2019-05-15T09:21:01.701Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/SentinelHub/Landsat8/2018-05-30%2C%20Landsat%208%20USGS%2C%20Thermal.png",
+                "type": "IMAGE",
+                "displayId": "0bafd1d2"
+              },
+              {
+                "id": "4d6d90d3-4df9-4495-8c87-f63edfe5be94",
+                "createdAt": "2019-05-15T09:21:01.702Z",
+                "updatedAt": "2019-05-15T09:21:01.702Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/SentinelHub/Landsat8/2018-05-30%2C%20Landsat%208%20USGS%2C%20Thermal-clipped.png",
+                "type": "IMAGE",
+                "displayId": "4d6d90d3"
+              },
+              {
+                "id": "100eb9ed-6f47-4162-8e86-e50816000286",
+                "createdAt": "2019-05-15T09:21:01.703Z",
+                "updatedAt": "2019-05-15T09:21:01.703Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/SentinelHub/Landsat8/2018-05-30%2C%20Landsat%208%20USGS%2C%20NDVI.png",
+                "type": "IMAGE",
+                "displayId": "100eb9ed"
+              },
+              {
+                "id": "09cb694b-d547-42b3-9f3f-2e3be85f0ec7",
+                "createdAt": "2019-05-15T09:21:01.704Z",
+                "updatedAt": "2019-05-15T09:21:01.704Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/SentinelHub/Landsat8/2018-05-30%2C%20Landsat%208%20USGS%2C%20NDVI-clipped.png",
+                "type": "IMAGE",
+                "displayId": "09cb694b"
+              },
+              {
+                "id": "3f14bebc-02e7-4765-8719-2537b2b47201",
+                "createdAt": "2019-05-15T09:21:01.704Z",
+                "updatedAt": "2019-05-15T09:21:01.704Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/SentinelHub/Landsat8/2018-05-30%2C%20Landsat%208%20USGS%2C%20False%20color.png",
+                "type": "IMAGE",
+                "displayId": "3f14bebc"
+              },
+              {
+                "id": "d3abdbce-149d-451c-91cb-f44789caec31",
+                "createdAt": "2019-05-15T09:21:01.704Z",
+                "updatedAt": "2019-05-15T09:21:01.704Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/SentinelHub/Landsat8/2018-05-30%2C%20Landsat%208%20USGS%2C%20False%20color-clipped.png",
+                "type": "IMAGE",
+                "displayId": "d3abdbce"
+              }
+            ],
+            "displayId": "b9730cac"
+          },
+          "machineName": "LARGE"
+        },
+        "status": "SUCCEEDED",
+        "parents": [],
+        "startedAt": "2019-07-02T22:21:27Z",
+        "finishedAt": "2019-07-02T22:23:21Z"
+      },
+      {
+        "id": "24c78a98-3def-4ee5-853d-2d5150757f2b",
+        "displayId": "24c78a98",
+        "createdAt": "2019-07-02T22:21:26.880Z",
+        "updatedAt": "2019-07-02T22:24:02.604Z",
+        "name": "land_cover_classification:1",
+        "block": {
+          "id": "a120d6eb-9a8c-4b7a-a85a-510c9071b39b",
+          "createdAt": "2019-04-29T11:40:55.348Z",
+          "updatedAt": "2019-04-29T11:43:23.685Z",
+          "name": "land_cover_classification",
+          "displayName": "DEMO: Land Cover Classification",
+          "description": "This block takes an AOI clipped image and runs land cover classification on it.\nThe classification is a simple unsupervised K-means clustering in the color space of the image.\nThe number of clusters and other parameters can be specified for the classification.",
+          "containerUrl": "registry.up42.dev/marketplace/land_cover_classification:a14OAO0KvcRXGZT4xxeCQFhpWrH4ArBOD5MOOumx",
+          "inputCapabilities": [
+            {
+              "name": "up42.data.aoiclipped"
+            }
+          ],
+          "outputCapabilities": [
+            {
+              "name": "custom.processing.land_cover"
+            }
+          ],
+          "provider": "UP42",
+          "tags": [
+            "imagery",
+            "processing",
+            "machine learning"
+          ],
+          "isPublic": true,
+          "isValid": true,
+          "parameters": {
+            "n_clusters": {
+              "type": "number",
+              "default": 6,
+              "required": false,
+              "description": "The number of clusters for the K-means clustering"
+            },
+            "n_iterations": {
+              "type": "number",
+              "default": 10,
+              "required": false,
+              "description": "The number of iterations for the K-means clustering"
+            },
+            "n_sieve_pixels": {
+              "type": "number",
+              "default": 64,
+              "required": false,
+              "description": "Minimum number of pixels in each patch for the classification"
+            }
+          },
+          "isRunnableByUser": true,
+          "type": "PROCESSING",
+          "isDryRunSupported": false,
+          "availableVersions": [
+            "1.0.1"
+          ],
+          "version": "1.0.1",
+          "metadata": {
+            "id": "b71b13b1-b051-4520-bfb1-4c4850ff32f0",
+            "createdAt": "2019-04-29T11:43:23.690Z",
+            "updatedAt": "2019-04-29T11:43:23.690Z",
+            "overview": "Land Cover is the physical material at the surface of the earth that includes grass, asphalt, trees, bare ground, water along with some other types (not to be confused with land use). Land cover information plays an essential role in many fields including forest and rangeland monitoring, municipal planning, desertification studies, identifying exposed soil for erosion risk and more. \n\n This block is a case study of the ability to integrate the Tensorflow framework on the platform, unleashing the potential to create neural networks for machine-learning. The source code is published as Free Software / Open Source and can be found at https://github.com/up42/land-cover-classification-demo .\n\n| General Information   | Description                                                                 |\n| --------------------- |-----------------------------------------------------------------------------|\n| Block Type            | classification (machine learning)                                           |\n| Supported Input Types | all raster data                                                             |\n| Resolution            | identical to the input                                                      |\n| Performance           | This is a proof of concept. No quality or accuracy measures were taken.                     |\n",
+            "termsAndConditionsUrl": "https://up42.com/legal/privacy-policy",
+            "iconUrl": "https://storage.googleapis.com/metadata-interstellar-staging/UP42_Blocks/LandCover/LC1_avatar.png",
+            "pricingStrategy": {
+              "id": "f1141eb2-6e06-4ae2-894d-a39035641268",
+              "createdAt": "2019-04-29T11:43:23.694Z",
+              "updatedAt": "2019-04-29T11:43:23.694Z",
+              "type": "MEGABYTE_INPUT",
+              "credits": 1,
+              "displayId": "f1141eb2"
+            },
+            "blockMarketplaceSampleData": [
+              {
+                "id": "861880f6-51fb-4a33-a434-ad42b96ffe9f",
+                "createdAt": "2019-04-29T11:43:23.698Z",
+                "updatedAt": "2019-04-29T11:43:23.698Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/UP42_Blocks/LandCover/LC1_orig.png",
+                "type": "IMAGE",
+                "displayId": "861880f6"
+              },
+              {
+                "id": "35607bb2-d4ed-43c0-b448-ff511166ae30",
+                "createdAt": "2019-04-29T11:43:23.699Z",
+                "updatedAt": "2019-04-29T11:43:23.699Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/UP42_Blocks/LandCover/LC1_output.png",
+                "type": "IMAGE",
+                "displayId": "35607bb2"
+              },
+              {
+                "id": "7c834d95-a4e4-4b59-aded-2027688460ca",
+                "createdAt": "2019-04-29T11:43:23.700Z",
+                "updatedAt": "2019-04-29T11:43:23.700Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/UP42_Blocks/LandCover/LC2_orig.png",
+                "type": "IMAGE",
+                "displayId": "7c834d95"
+              },
+              {
+                "id": "bab08eb1-733a-403a-a29f-156f02c4e6ef",
+                "createdAt": "2019-04-29T11:43:23.700Z",
+                "updatedAt": "2019-04-29T11:43:23.700Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/UP42_Blocks/LandCover/LC2_output.png",
+                "type": "IMAGE",
+                "displayId": "bab08eb1"
+              }
+            ],
+            "displayId": "b71b13b1"
+          },
+          "machineName": "MEDIUM"
+        },
+        "status": "RUNNING",
+        "parents": [
+          {
+            "id": "3344b712-aa9a-4cdb-94ae-7f3e379b7369",
+            "displayId": "3344b712",
+            "createdAt": "2019-07-02T22:21:26.879Z",
+            "updatedAt": "2019-07-02T22:23:23.378Z",
+            "name": "sentinelhub-landsat8-aoiclipped:1"
+          }
+        ],
+        "startedAt": "2019-07-02T22:23:23Z",
+        "finishedAt": null
+      }
+    ],
+    "workflow": {
+      "id": "21415975-390f-4215-becb-8d46aaf5156c",
+      "displayId": "21415975",
+      "createdAt": "2019-05-16T13:38:57.996Z",
+      "updatedAt": "2019-05-16T13:39:16.735Z",
+      "name": "Land cover + landsat8"
+    }
+  }
+}

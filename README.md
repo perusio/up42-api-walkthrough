@@ -69,7 +69,8 @@ cURL request above.
 ### List all the jobs for a given project
 
 ```bash
-curl -L -s -H "Authorization: Bearer $PTOKEN" "https://api.up42.dev/projects/$PROJ/jobs" | jq > jobs_$PROJ.json
+curl -L -s -H "Authorization: Bearer $PTOKEN"
+"https://api.up42.dev/projects/$PROJ/jobs" | jq '.' > jobs_$PROJ.json
 ```
 
 This creates the following
@@ -1485,10 +1486,10 @@ This creates the following
 To create and run a job we need to get first the workflow IDs. 
 
 ```bash
-WORKFLOW=$(curl -L -s -H "Authorization: Bearer $PTOKEN" "https://api.up42.dev/projects/$PROJ/jobs" | jq -r '.data[] | .workflow.id')
+WORKFLOW=$(curl -L -s -H "Authorization: Bearer $PTOKEN" "https://api.up42.dev/projects/$PROJ/jobs" | jq -r '.data[0] | .workflow.id')
 ```
 
-that returns a single element, since I only have one workflow for this
+that returns a single element, since we only have one workflow for this
 project: 
 
 ```bash
@@ -1549,4 +1550,36 @@ The first returned job parameters was returned.
 
 ```
 
+Finally we can create and run the job:
 
+```bash
+curl -s -L -X POST -H "Authorization: Bearer $PTOKEN" -H 'Content-Type: application/json' "https://api.up42.dev/projects/$PROJ/workflows/$WORKFLOW/jobs" -d @job_params_5a21eaff-cdaa-48ab-bedf-5454116d16ff.json
+```
+
+### Get the job status
+
+```bash
+curl -L -s -H "Authorization: Bearer $PTOKEN"
+"https://api.up42.dev/projects/$PROJ/jobs/96b4c117-ab4d-44cf-afb1-0922d91031d4"
+| jq -r '.data.status'
+```
+In this case it returns
+
+```bash
+RUNNING
+```
+
+### Get the jobs logs
+
+To get the log of a running job we first need to identify the task
+that is running:
+
+```bash
+TASK=$(cat jobs_job-96b4c117-ab4d-44cf-afb1-0922d91031d4.json | jq -r '.data.tasks[] as $task | if $task.status == "RUNNING" then $task.id else "" end')
+```
+It returns:
+
+```bash
+echo $TASK
+24c78a98-3def-4ee5-853d-2d5150757f2b
+```
