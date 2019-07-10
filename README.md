@@ -23,8 +23,9 @@ The UP42 API allows for doing the following things on a given project:
 It means that a **project key** is **always** needed. Therefore you
 always need to create a project **through the UI**.
 
-In the examples below I will use a project I have, so it won't work
-for you, you should adapt to use a project of yours.
+The example below uses an example project. So the specific values of
+things like project key and project ID are given for illustration
+purposes only. In your case the values will be different.
 
 **Note**: Please be aware that the project ID and the project key
 allow anyone to manipulate your project (account) so be careful and do
@@ -84,7 +85,7 @@ This creates the following
 [`jobs_5a21eaff-cdaa-48ab-bedf-5454116d16ff.json`](https://gist.github.com/perusio/4e228693b0e0c10492d7ccc706d69a2a) file.
 
 
-### Create and run a job
+### Create and run a job {#create-run-job}
 
 To create and run a job you need to get first the workflow IDs. 
 
@@ -184,8 +185,7 @@ containing all the job information.
 Now filter the previous request to get the job status.
 
 ```bash
-curl -L -s -H "Authorization: Bearer $PTOKEN"
-"https://api.up42.com/projects/$PROJ/jobs/96b4c117-ab4d-44cf-afb1-0922d91031d4" | jq -r '.data.status'
+curl -L -s -H "Authorization: Bearer $PTOKEN" "https://api.up42.com/projects/$PROJ/jobs/96b4c117-ab4d-44cf-afb1-0922d91031d4" | jq -r '.data.status'
 ```
 In this case it returns:
 
@@ -228,7 +228,7 @@ Obtaining the [GeoJSON](https://en.wikipedia.org/wiki/GeoJSON) file and/or the o
 #### Get the results: GeoJSON
 
 ```bash
-OUTPUT_URL="https://api.up42.com/projects/$PROJ/jobs/$JOB/outputs
+OUTPUT_URL="https://api.up42.com/projects/$PROJ/jobs/$JOB/outputs"
 curl -s -L -H "Authorization: Bearer $PTOKEN" "$OUTPUT_URL/data-json"  | jq '.' > output-$JOB.json
 ```
 
@@ -365,9 +365,234 @@ As you can see the results are the same as for the job. Which means that:
 > the final task of a workflow produces the same results as the job
 > itself
 
+## Workflow API
+
+The workflow API allows you to manipulate workflows. You can do all
+[CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)
+operations on workflows.
+
+### Get all the workflows
+
+```bash
+URL_WORKFLOWS="https://api.up42.dev/projects/$PROJ/workflows"
+curl -s -L -H "Authorization: Bearer $PTOKEN" $URL_WORKFLOWS | jq '.' > workflows-$PROJ.json
+```
+
+[This](https://gist.github.com/perusio/3a5bd15878caa25f99e8d12e2a1774d5)
+is the output file.
+
+In this case there is only one workflow. You can verifiy this by
+issuing the following command:
+
+```bash
+cat workflows-5a21eaff-cdaa-48ab-bedf-5454116d16ff.json | jq '.data | length'
+```
+
+giving `1`. Hence it is confirmed that there is a single workflow in
+this project.
+
+Extracting the workflow ID:
+
+```bash
+cat workflows-5a21eaff-cdaa-48ab-bedf-5454116d16ff.json | jq -j '.data[] | .id'
+```
+returns:
+
+```bash
+21415975-390f-4215-becb-8d46aaf5156c
+```
+
+As you can see it is the same workflow ID as we extracted before in
+[creating and running the job](#create-run-job).
+
+### Get a particular workflow
+
+Now reusing the `WORKFLOW` variable from above to obtain the details
+for a particular workflow.
+
+```bash
+curl -s -L -H "Authorization: Bearer $PTOKEN" "$URL_WORKFLOWS/$WORKFLOW" | jq '.' > workflow-$WORKFLOW.json
+```
+
+Returns the [file](https://gist.github.com/perusio/7c8ec9f06de6be3695e04a0b627b1535).
+
+### Create a workflow
+
+You can think of workflow creation as being an operation consiting of
+two steps:
+
+ 1. Create the workflow resource via a POST request.
+ 2. Populate that resource via a PUT request.
+
+#### POST request: creating the resource
+
+To create a new workflow we need to give a JSON as the request body.
+
+```js
+{
+  "id": null,
+  "name": "Create a new landsat 8 + Land cover workflow",
+  "description": "Just trying out workflow creation",
+  "projectId": "5a21eaff-cdaa-48ab-bedf-5454116d16ff",
+  "tasks": []
+}
+```
+
+as you can see we have the following fields:
+
+ + `id`: the workflow ID, it is `null` because the ID will be given in the response once the resource is created.
+ + `name`: the name you want to give to the workflow.
+ + `description`: the workflow description.
+ + `projectId`: the project ID we defined above.
+ + `tasks`: the tasks in this workflow. Since we just created the
+   workflow this is currently empty. Therefore we set it to an empty array.
+
+Issuing the request:
+
+```bash
+curl -s -L -X POST -H "Authorization: Bearer $PTOKEN" -H 'Content-Type: application/json' $URL_WORKFLOWS -d @create_new_workflow.json | jq '.' > workflow-created-response.json
+```
+
+And this is the response body.
+
+```js
+{
+  "error": null,
+  "data": {
+    "id": "ce6f6b93-f227-42d8-b998-a043762c8c5c",
+    "name": "Create a new landsat 8 + Land cover workflow",
+    "description": "Just trying out workflow creation",
+    "tasks": [],
+    "createdAt": "2019-07-10T17:51:26.371Z",
+    "updatedAt": "2019-07-10T17:51:26.375Z",
+    "totalProcessingTime": 0
+  }
+}
+
+```
+
+The resource has been created with the ID
+`ce6f6b93-f227-42d8-b998-a043762c8c5c`.
+
+The ID is the last component of the URL when creating tasks, since it refers to a
+specific resource: the just created workflow.
+
+It is useful to store it in a variable:
+
+```bash
+NEW_WORKFLOW=$(cat workflow-created-response.json | jq -j '.data.id')
+```
+
+To confirm the value:
+
+```bash
+> echo $NEW_WORKFLOW
+
+ce6f6b93-f227-42d8-b998-a043762c8c5c
+```
+
+Now using the ID you can populate the workflow with the tasks. Task
+creation will be done one by one. Since the workflow has two tasks
+there are two separate PUT requests.
+  
+#### Creating the the first task: data block addition
+ 
+Adding the data block: Landsat 8 AOI clipped.
+
+First you need to create the response body for the PUT request.
+
+```js
+{
+  "id": "ce6f6b93-f227-42d8-b998-a043762c8c5c",
+  "name": "Create a new landsat 8 + Land cover workflow",
+  "description": "Just trying out workflow creation",
+  "projectId": "5a21eaff-cdaa-48ab-bedf-5454116d16ff",
+  "tasks": [
+    {
+      "name": "First task_ Landsat 8 AOI clipped data block",
+      "parentName": null,
+      "blockName": "sentinelhub-landsat8-aoiclipped"
+    }
+  ]
+}
+
+```
+
+where we have the fields given when creating the workflow resource
+(POST request) plus the workflow ID and the first task specific fields:
+
+ + `name`: the task name.
+ + `parentName`: the name of the parent task, i.e., the task that
+   precedes the current task. Since this is the first task, it is
+   `null`.
+ + `blockName`: the block machine name. 
+
+Now issuing the request:
+
+```bash
+curl -L -s -X PUT -H "Authorization: Bearer $PTOKEN" -H 'Content-Type: application/json' "$URL_WORKFLOWS/$NEW_WORKFLOW" -d @create_task1_workflow-ce6f6b93-f227-42d8-b998-a043762c8c5c.json | jq '.' > workflow_task1_created-$NEW_WORKFLOW.json
+```
+
+generates the [response body](https://gist.github.com/perusio/d544bfc158035c483867fa74a9697ef8).
+ 
+The workflow has now the first task in place.
+
+#### Creating the the second task: processing block addition
+
+Adding the processing block: Land cover classification. 
+ 
+The new  block needs to be added to the task list (a JS array).
+
+```js
+{
+  "id": "ce6f6b93-f227-42d8-b998-a043762c8c5c",
+  "name": "Create a new landsat 8 + Land cover workflow",
+  "description": "Just trying out workflow creation",
+  "projectId": "5a21eaff-cdaa-48ab-bedf-5454116d16ff",
+  "tasks": [
+    {
+      "name": "First task_ Landsat 8 AOI clipped data block",
+      "parentName": null,
+      "blockName": "sentinelhub-landsat8-aoiclipped"
+    },
+   {
+     "name": "land_cover_classification:1",
+     "parentName": "First task_ Landsat 8 AOI clipped data block",
+     "blockName": "land_cover_classification"
+   }
+  ]
+}
+
+```
+
+The task list has now two entries, the second being the
+`land_cover_classification` block. Notice that `parentName` is set to
+be the first task in the workflow: `First task Landsat 8 AOI-Clipped
+data block`.
+
+To add the second block the API call is:
+
+```bash
+curl -L -s -X PUT -H "Authorization: Bearer $PTOKEN" -H 'Content-Type: application/json' "$URL_WORKFLOWS/$NEW_WORKFLOW" -d @create_task2_workflow-ce6f6b93-f227-42d8-b998-a043762c8c5c.json | jq '.' > workflow_task2_created-$NEW_WORKFLOW.json
+```
+
+that outputs the following
+[file](https://gist.github.com/perusio/d27bd895bc383635b4e4b3d1469bdebb)
+in the response body.
+
+Now querying the workflow endpoint:
+
+```bash
+curl -L -s -H "Authorization: Bearer $PTOKEN" -H 'Content-Type: application/json' "$URL_WORKFLOWS/$NEW_WORKFLOW" | jq '.' > workflow-$NEW_WORKFLOW.json
+```
+
+and comparing the current output with the
+[output](https://gist.github.com/perusio/d27bd895bc383635b4e4b3d1469bdebb)
+when creating the second task you can cerify that they are identical.
 
 ## TODO
 
- 1. Document the workflow API.
- 2. Document the blocks API.
+ 1. Document the blocks API.
+ 2. Document how to do DRY_RUN jobs (TestQuery).
  3. Move this content to https://docs.up42.com.
+

@@ -1,0 +1,202 @@
+{
+  "error": null,
+  "data": {
+    "id": "ce6f6b93-f227-42d8-b998-a043762c8c5c",
+    "name": "Create a new landsat 8 + Land cover workflow",
+    "description": "Just trying out workflow creation",
+    "tasks": [
+      {
+        "name": "First task_ Landsat 8 AOI clipped data block",
+        "parents": [],
+        "blockName": "sentinelhub-landsat8-aoiclipped",
+        "blockVersionTag": "1.0.32",
+        "block": {
+          "id": "e0b133ae-7b9c-435c-99ac-c4527cc8d9cf",
+          "createdAt": "2019-04-18T14:23:16.339Z",
+          "updatedAt": "2019-07-05T15:31:29.370Z",
+          "name": "sentinelhub-landsat8-aoiclipped",
+          "displayName": "Landsat-8 Level 1 (TOA) AOI clipped",
+          "description": "This block provides Landsat-8 imagery clipped to all webmercator tiles intersecting a given bounding box or AOI on a given zoom level. The part of the image that does not intersect with these tiles will be black. The block outputs a single GeoTIFF file and will store the AOI within the output feature geometry.",
+          "containerUrl": "registry.up42.dev/marketplace/sentinelhub-landsat8-aoiclipped:lT9OTx77037LG6NHHm08c2hdlL5T7ZpavHLMJ70N",
+          "inputCapabilities": [],
+          "outputCapabilities": [
+            {
+              "name": "up42.data.aoiclipped"
+            }
+          ],
+          "provider": "Sentinel Hub",
+          "tags": [
+            "MSI",
+            "Landsat",
+            "Imagery"
+          ],
+          "isPublic": true,
+          "isValid": true,
+          "parameters": {
+            "bbox": {
+              "type": "array",
+              "default": null
+            },
+            "time": {
+              "type": "dateRange",
+              "default": null
+            },
+            "limit": {
+              "type": "number",
+              "default": 1
+            },
+            "intersects": {
+              "type": "geometry"
+            },
+            "zoom_level": {
+              "type": "number",
+              "default": 12
+            }
+          },
+          "isRunnableByUser": true,
+          "type": "DATA",
+          "isDryRunSupported": true,
+          "availableVersions": [
+            "0.4.1",
+            "0.4.2",
+            "0.4.3",
+            "0.4.4",
+            "0.4.5",
+            "0.4.6",
+            "0.4.8",
+            "0.5.0",
+            "0.8.0",
+            "0.8.2",
+            "0.8.3",
+            "0.9.0",
+            "0.9.1",
+            "0.9.2",
+            "0.9.3",
+            "0.9.4",
+            "0.9.5",
+            "0.9.6",
+            "0.9.8",
+            "1.0.0",
+            "1.0.10",
+            "1.0.11",
+            "1.0.13",
+            "1.0.14",
+            "1.0.15",
+            "1.0.16",
+            "1.0.17",
+            "1.0.18",
+            "1.0.19",
+            "1.0.2",
+            "1.0.20",
+            "1.0.21",
+            "1.0.22",
+            "1.0.23",
+            "1.0.24",
+            "1.0.25",
+            "1.0.26",
+            "1.0.27",
+            "1.0.28",
+            "1.0.3",
+            "1.0.30",
+            "1.0.31",
+            "1.0.32",
+            "1.0.4",
+            "1.0.5",
+            "1.0.6",
+            "1.0.7",
+            "1.0.8",
+            "1.0.9"
+          ],
+          "version": "1.0.32",
+          "metadata": {
+            "id": "ae9ce026-fa20-4703-b57e-7a73d1ca4cdd",
+            "createdAt": "2019-07-05T15:31:29.370Z",
+            "updatedAt": "2019-07-05T15:31:29.370Z",
+            "overview": "Landsat 8 is a multi-spectral imaging mission, capturing visible, infrared bands, and thermal bands since February 2013. A Pan-sharpening band is available for visual spectral bands as well. This block is a L1 (TOA) data block that is AOI-clipped. Only Tier 1 scenes i.e. those with the highest available data quality which are considered suitable for time-series analysis are delivered. \n\n Landsat 8 is a unique resource for those who work in agriculture, geology, forestry, regional planning, education, mapping, and global change research.\n\n All Landsat 8 data are available from the start of imagery capture. All new acquisitions are made available each day, often within hours of production. \n\n  \n  | Name  |  Description               | Resolution | \n  |-------|----------------------------|------------|\n  | B01   | Ultra Blue                 | 30m        | \n  | B02   | Blue                       | 30m        | \n  | B03   | Green                      | 30m        | \n  | B04   | Red                        | 30m        | \n  | B05   | Near Infrared (NIR)        | 30m        | \n  | B06   | Shortwave Infrared (SWIR)  | 30m        | \n  | B07   | Shortwave Infrared (SWIR)  | 30m        |\n  | B08   | Panchromatic               | 15m        | \n  | B09   | Cirrus                     | 30m        | \n  | B10   | Thermal Infrared (TIRS)    | 30m        | \n  | B11   | Thermal Infrared (TIRS)    | 30m        | \n  \n  \n",
+            "termsAndConditionsUrl": "https://sentinel-hub.com/tos",
+            "iconUrl": "https://storage.googleapis.com/metadata-interstellar-staging/SentinelHub/Landsat8/Landsat-8-Avatar.png",
+            "pricingStrategy": {
+              "id": "24e7fcac-65b9-45d0-85ef-e1b04e0d9c72",
+              "createdAt": "2019-07-05T15:31:29.371Z",
+              "updatedAt": "2019-07-05T15:31:29.371Z",
+              "type": "MEGAPIXEL_OUTPUT",
+              "credits": 1,
+              "displayId": "24e7fcac"
+            },
+            "blockMarketplaceSampleData": [
+              {
+                "id": "8819360a-dd8a-4fdd-be07-b94582e04d95",
+                "createdAt": "2019-07-05T15:31:29.387Z",
+                "updatedAt": "2019-07-05T15:31:29.387Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/SentinelHub/Landsat8/2018-05-30%2C%20Landsat%208%20USGS%2C%20True%20color.png",
+                "type": "IMAGE",
+                "displayId": "8819360a"
+              },
+              {
+                "id": "5b83718e-dab4-4a61-b21e-b3a6d21c966a",
+                "createdAt": "2019-07-05T15:31:29.389Z",
+                "updatedAt": "2019-07-05T15:31:29.389Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/SentinelHub/Landsat8/2018-05-30%2C%20Landsat%208%20USGS%2C%20True%20color-clipped.png",
+                "type": "IMAGE",
+                "displayId": "5b83718e"
+              },
+              {
+                "id": "cec0cd1d-2acb-4321-8a17-8d3c48731678",
+                "createdAt": "2019-07-05T15:31:29.390Z",
+                "updatedAt": "2019-07-05T15:31:29.390Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/SentinelHub/Landsat8/2018-05-30%2C%20Landsat%208%20USGS%2C%20Thermal.png",
+                "type": "IMAGE",
+                "displayId": "cec0cd1d"
+              },
+              {
+                "id": "44eecf3a-3530-4166-baf7-a2688c6f1e92",
+                "createdAt": "2019-07-05T15:31:29.390Z",
+                "updatedAt": "2019-07-05T15:31:29.390Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/SentinelHub/Landsat8/2018-05-30%2C%20Landsat%208%20USGS%2C%20Thermal-clipped.png",
+                "type": "IMAGE",
+                "displayId": "44eecf3a"
+              },
+              {
+                "id": "013c4e09-87f4-4261-81bf-224795a0a844",
+                "createdAt": "2019-07-05T15:31:29.391Z",
+                "updatedAt": "2019-07-05T15:31:29.391Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/SentinelHub/Landsat8/2018-05-30%2C%20Landsat%208%20USGS%2C%20NDVI.png",
+                "type": "IMAGE",
+                "displayId": "013c4e09"
+              },
+              {
+                "id": "df87b4cb-1d48-4230-a5b6-e8a8ae969321",
+                "createdAt": "2019-07-05T15:31:29.391Z",
+                "updatedAt": "2019-07-05T15:31:29.391Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/SentinelHub/Landsat8/2018-05-30%2C%20Landsat%208%20USGS%2C%20NDVI-clipped.png",
+                "type": "IMAGE",
+                "displayId": "df87b4cb"
+              },
+              {
+                "id": "04045475-73fa-41d6-8523-b62bf13fd8ba",
+                "createdAt": "2019-07-05T15:31:29.392Z",
+                "updatedAt": "2019-07-05T15:31:29.392Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/SentinelHub/Landsat8/2018-05-30%2C%20Landsat%208%20USGS%2C%20False%20color.png",
+                "type": "IMAGE",
+                "displayId": "04045475"
+              },
+              {
+                "id": "f9f620ee-8720-41fb-bb9c-e3f40c891ec9",
+                "createdAt": "2019-07-05T15:31:29.392Z",
+                "updatedAt": "2019-07-05T15:31:29.392Z",
+                "value": "https://storage.googleapis.com/metadata-interstellar-staging/SentinelHub/Landsat8/2018-05-30%2C%20Landsat%208%20USGS%2C%20False%20color-clipped.png",
+                "type": "IMAGE",
+                "displayId": "f9f620ee"
+              }
+            ],
+            "displayId": "ae9ce026"
+          },
+          "machineName": "LARGE"
+        }
+      }
+    ],
+    "createdAt": "2019-07-10T17:51:26.371Z",
+    "updatedAt": "2019-07-10T18:27:44.721Z",
+    "totalProcessingTime": 0
+  }
+}

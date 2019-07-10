@@ -1,0 +1,13 @@
+{
+  "id": "ce6f6b93-f227-42d8-b998-a043762c8c5c",
+  "name": "Create a new landsat 8 + Land cover workflow",
+  "description": "Just trying out workflow creation",
+  "projectId": "5a21eaff-cdaa-48ab-bedf-5454116d16ff",
+  "tasks": [
+    {
+      "name": "First task_ Landsat 8 AOI clipped data block",
+      "parentName": null,
+      "blockName": "sentinelhub-landsat8-aoiclipped"
+    }
+  ]
+}

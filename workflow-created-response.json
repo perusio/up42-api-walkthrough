@@ -1,0 +1,12 @@
+{
+  "error": null,
+  "data": {
+    "id": "ce6f6b93-f227-42d8-b998-a043762c8c5c",
+    "name": "Create a new landsat 8 + Land cover workflow",
+    "description": "Just trying out workflow creation",
+    "tasks": [],
+    "createdAt": "2019-07-10T17:51:26.371Z",
+    "updatedAt": "2019-07-10T17:51:26.375Z",
+    "totalProcessingTime": 0
+  }
+}
