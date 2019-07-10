@@ -13,7 +13,7 @@ The UP42 API allows for doing the following things on a given project:
 2. Work with jobs and tasks:
    * get job task logs
    * get job task outputs (`data.json`)
-   * get job tasks output directory
+   * get job tasks output directory 
 3. Work with workflows:
    * get workflows
    * get workflow
@@ -30,23 +30,24 @@ for you, you should adapt to use a project of yours.
 allow anyone to manipulate your project (account) so be careful and do
 not share it around. Someone might find it and besides messing with
 your project it will make you incur costs and thus reduce the
-currently available credits in your platform. 
+currently available credits in our platform. 
 
 ## Requirements
 
  1. [`cURL`](https://curl.haxx.se).
  2. [`jq`](https://stedolan.github.io/jq/).
 
-We will be using the
-[Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) shell in this guide.
+[Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) is the shell
+used in this guide.
 
-All output is given as Github gists linked below as they are returned
-by the API.
+All output is given as Github
+[gists](https://help.github.com/en/articles/creating-gists#about-gists)
+linked below as they are returned by the API.
 
 ## Authentication: getting the token
 
 Before attempting to do anything with the API you need to get a token
-so that you perform any type of operation on your project.
+in order to perform any type of operation on your project.
 
 ```bash
 # Set the project ID.
@@ -57,7 +58,7 @@ PROJ=5a21eaff-cdaa-48ab-bedf-5454116d16ff
 PTOKEN=$(curl -sX POST "https://$PROJ:$PKEY@api.up42.com/oauth/token"   -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials' | jq -r '.data.accessToken')
 ```
 
-Now we can echo the token back in the shell:
+Now you can echo the token in the shell:
 
 ```bash
 echo $PTOKEN
@@ -69,7 +70,7 @@ cURL request above.
 
 **Note**: Since Bash does not record in the shell history all commands
 started with a space we recommend you set the `PKEY` variable above
-such that the line start with a space like we did it here.
+such that the line start with a space like done here.
 
 ## Working with jobs
 
@@ -85,27 +86,27 @@ This creates the following
 
 ### Create and run a job
 
-To create and run a job we need to get first the workflow IDs. 
+To create and run a job you need to get first the workflow IDs. 
 
 ```bash
 WORKFLOW=$(curl -L -s -H "Authorization: Bearer $PTOKEN" "https://api.up42.com/projects/$PROJ/jobs" | jq -j '.data[0] | .workflow.id')
 ```
 
-that returns a single element, since we only have one workflow for this
+that returns a single element, since there is only one workflow for this
 project: 
 
 ```bash
 echo $WORKFLOW 21415975-390f-4215-becb-8d46aaf5156c
 ```
 
-we also need to get the job parameters. In this case we are just copying
-from a previous job. Using the previously saved job list. We have:
+You also need to get the job parameters. In this case you are just copying
+from a previous job. Using the previously saved job list.
 
 ```bash
 cat jobs_5a21eaff-cdaa-48ab-bedf-5454116d16ff.json | jq '.data[0].inputs' > job_params_5a21eaff-cdaa-48ab-bedf-5454116d16ff.json
 ```
 
-The first returned job parameters was returned.
+The first returned job parameters are:
 
 ```js
 {
@@ -151,7 +152,7 @@ The first returned job parameters was returned.
 
 ```
 
-Finally we can create and run the job:
+Finally you can create and run the job:
 
 ```bash
 # Create the URL as variable.
@@ -163,6 +164,9 @@ You can see the job parameters [here](https://gist.github.com/perusio/fc948f4876
 
 ### Get the previously launched job information
 
+Now that a job is launched to obtain information on it you query the
+API the following way:
+
 ```bash
 # Job URL.
 URL_JOB_INFO=https://api.up42.com/projects/$PROJ/jobs/$JOB"
@@ -171,12 +175,13 @@ JOB=96b4c117-ab4d-44cf-afb1-0922d91031d4
 curl -s -L -H "Authorization: Bearer $PTOKEN" $URL_JOB_INFO | jq '.' > jobs_job-$JOB.json
 ```
 
-It returns the following [JSON](https://gist.github.com/perusio/e4e00cd7190ed97da3f25f78600c042e).
+It returns the
+[JSON](https://gist.github.com/perusio/e4e00cd7190ed97da3f25f78600c042e)
+containing all the job information.
 
 ### Get the job status
 
-We can query the API to get the job status.
-
+Now filter the previous request to get the job status.
 
 ```bash
 curl -L -s -H "Authorization: Bearer $PTOKEN"
@@ -192,9 +197,9 @@ This means that the job is still running.
 
 ### Get the jobs logs
 
-To get the log of a running job we first need to identify the task
-that is running. For that we can use `jq` to query the previously
-saved job information.
+To get the log of a running job you first need to identify the task
+that is running. For that you use `jq` to query the previously
+saved file containing the job information.
 
 ```bash
 TASK=$(cat jobs_job-96b4c117-ab4d-44cf-afb1-0922d91031d4.json | jq -j '.data.tasks[] as $task | if $task.status == "RUNNING" then $task.id else "" end')
@@ -207,38 +212,36 @@ echo $TASK
 24c78a98-3def-4ee5-853d-2d5150757f2b
 ```
 
-
 ```bash
 RUNNING_TASK_URL="https://api.up42.com/projects/$PROJ/jobs/$JOB/tasks/$TASK"
-curl -s -H "Authorization: Bearer $PTOKEN" -H 'Content-Type: text/plain' "$RUNNING_TASK_URL/logs" > task_log-$TASK.txt
+curl -s -L -H "Authorization: Bearer $PTOKEN" -H 'Content-Type: text/plain' "$RUNNING_TASK_URL/logs" > task_log-$TASK.txt
 ```
 
 This command returns the log file available at [`https://gist.github.com/perusio/60639d67a47e241cdc8356d8c30a1ff9`](https://gist.github.com/perusio/60639d67a47e241cdc8356d8c30a1ff9).
 
 ### Get the job results
 
-Once the job completes we can query the API to get the results. We can
-obtain the [GeoJSON](https://en.wikipedia.org/wiki/GeoJSON) file and/or the output directory delivered as a
-gzipped [tarball](https://en.wikipedia.org/wiki/Tar_(computing)).
-
+Once the job completes you can query the API to get the results.
+Obtaining the [GeoJSON](https://en.wikipedia.org/wiki/GeoJSON) file and/or the output directory delivered as a
+[gzipped](https://en.wikipedia.org/wiki/Gzip) [tarball](https://en.wikipedia.org/wiki/Tar_(computing)).
 
 #### Get the results: GeoJSON
 
 ```bash
 OUTPUT_URL="https://api.up42.com/projects/$PROJ/jobs/$JOB/outputs
-curl -s -H "Authorization: Bearer $PTOKEN" "$OUTPUT_URL/data-json"  | jq '.' > output-$JOB.json
+curl -s -L -H "Authorization: Bearer $PTOKEN" "$OUTPUT_URL/data-json"  | jq '.' > output-$JOB.json
 ```
 
-which can be found [here](https://gist.github.com/perusio/4597361dc4792dfdda8a7260b39e9baf).
+Produces this [output](https://gist.github.com/perusio/4597361dc4792dfdda8a7260b39e9baf).
 
 
 ### Get the results: tarball
 
 ```bash
-curl -s -H "Authorization: Bearer $PTOKEN" -o output-$JOB.tar.gz "$OUTPUT_URL/directory"
+curl -s -L -H "Authorization: Bearer $PTOKEN" -o output-$JOB.tar.gz "$OUTPUT_URL/directory"
 ```
 
-Now we can inspect the resulting tarball:
+Inspect the retrieved tarball:
 
 ```bash
 > tar tar ztvf output_$JOB.tar.gz
@@ -249,22 +252,23 @@ drwxrwxrwx  0 root   root        0 Jul  3 00:39 output
 
 ```
 
-We see both the GeoJSON file and the output as a
+There is both the GeoJSON file and the output as a
 [GeoTIFF](https://en.wikipedia.org/wiki/GeoTIFF) file. The file name
 is constructed from the first task ID and part of the block name. See
-below for an explanation of tasks.
+below for an explanation of what tasks are.
 
 ### Get individual tasks results
 
-Our job is composed of two tasks, each corresponding to a block in the
-workflow: the first is obtaining the Landasat 8 data, the second is
-runnning the Land cover classification. We can obtain the partial
-results, i.e., we can get the results from each task in the job.
+The job is composed of two tasks, each corresponding to a block in the
+workflow: the first is obtaining the [Landsat 8](https://up42.com/marketplace/block/95519b2d-09d7-4cd0-a321-4d6a46bef6c1)
+data, the second is runnning the [Land cover classification](https://up42.com/marketplace/block/ae2113e8-05df-41e6-9871-5d782705d8e1). We
+can obtain the partial results, i.e., we can get the results from each
+task in the job.
 
 The task results are again given as a GeoJSON file and/or a tarball as
 they are for a job result.
 
-We can iterate through the tasks in the job file.
+Iterating through the tasks in the job file.
 
 ```bash
 cat jobs_job-$JOB.json | jq -r '.data.tasks[] | .id  + "_" + .name'
@@ -277,10 +281,11 @@ which outputs:
 24c78a98-3def-4ee5-853d-2d5150757f2b land_cover_classification:1
 ```
 
-In the first column we have the task ID and on the second one we have
-the task name, clearly identifying the task ID and what it does.
+The first is the task ID and the second is the task name, clearly
+identifying the task ID and what it corresponds to in terms of the
+workflow.
 
-Let us create two shell variables one for each task:
+Create two shell variables, one for each task:
 
 ```bash
 TASK1=$(cat jobs_job-$JOB.json | jq -j '.data.tasks[0] | .id')
@@ -289,10 +294,11 @@ TASK2=$(cat jobs_job-$JOB.json | jq -j '.data.tasks[1] | .id')
 
 ```bash
 > echo $TASK1 $TASK2
+
 3344b712-aa9a-4cdb-94ae-7f3e379b7369 24c78a98-3def-4ee5-853d-2d5150757f2b
 ```
 
-Now that we have the individual tasks IDs let us proceed to get the
+Now with the individual tasks IDs let us proceed to get the
 respective results.
 
 ##### First task results: GeoJSON
@@ -301,10 +307,10 @@ The first task is the Landsat 8 data acquisition. The output GeoJSON
 is:
 
 ```bash
-curl -s -H "Authorization: Bearer $PTOKEN" "$TASK1_URL/outputs/data-json" | jq '.' > output_task-$TASK1.json
+curl -s -L -H "Authorization: Bearer $PTOKEN" "$TASK1_URL/outputs/data-json" | jq '.' > output_task-$TASK1.json
 ```
 
-which can be viewed [here](https://gist.github.com/perusio/f9407da92c65a1bcb76621b658185ad6).
+returning the following [file](https://gist.github.com/perusio/f9407da92c65a1bcb76621b658185ad6).
 
 
 ##### First task results: tarball
@@ -324,7 +330,7 @@ drwxrwxrwx  0 root   root        0 Jul  3 00:23 output
 -rw-r--r--  0 root   root 132209093 Jul  3 00:23 output/e3650bac-bfbe-4ed2-bec4-9ea50245d2c0.tif
 ```
 
-we can see the resulting Landsat 8 GeoTIFF image there.
+you can see the resulting Landsat 8 GeoTIFF image there.
 
 ##### Second task results: GeoJSON
 
@@ -354,8 +360,7 @@ drwxrwxrwx  0 root   root        0 Jul  3 00:39 output
 -rw-r--r--  0 root   root  5515635 Jul  3 00:39 output/e3650bac-bfbe-4ed2-bec4-9ea50245d2c0_land_cover.tif
 ```
 
-we can see that we get the same results as for the job. Hence we
-conclude that:
+As you can see the results are the same as for the job. Which means that:
 
 > the final task of a workflow produces the same results as the job
 > itself
