@@ -1,5 +1,13 @@
 # UP42 API walktrough
 
+## Preamble
+
+This walktrough is just a scratchpad for the official [UP42](up42.com)
+[documentation site.](https://docs.up42.com). Always refer to that
+site for the currently officialy supported API endpoints. It may
+appear here API features that are not yet official or that are a work
+in progress.
+
 ## Introduction
 
 The UP42 API allows for doing the following things on a given project:
