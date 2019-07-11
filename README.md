@@ -585,7 +585,7 @@ data block`.
 To add the second block the API call is:
 
 ```bash
-curl -L -s -X PUT -H "Authorization: Bearer $PTOKEN" -H 'Content-Type: application/json' "$URL_WORKFLOWS/$NEW_WORKFLOW" -d @create_task2_workflow-ce6f6b93-f227-42d8-b998-a043762c8c5c.json | jq '.' > workflow_task2_created-$NEW_WORKFLOW.json
+curl -s -L -X PUT -H "Authorization: Bearer $PTOKEN" -H 'Content-Type: application/json' "$URL_WORKFLOWS/$NEW_WORKFLOW" -d @create_task2_workflow-ce6f6b93-f227-42d8-b998-a043762c8c5c.json | jq '.' > workflow_task2_created-$NEW_WORKFLOW.json
 ```
 
 that outputs the following
