@@ -49,7 +49,8 @@ currently available credits in our platform.
 [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) is the shell
 used in this guide.
 
-All output is given as Github
+All outputs (response bodies) deemed to large to be shown here are
+given as Github
 [gists](https://help.github.com/en/articles/creating-gists#about-gists)
 linked below as they are returned by the API.
 
@@ -89,7 +90,7 @@ such that the line start with a space like done here.
 ### List all the jobs for a given project
 
 ```bash
-curl -L -s -H "Authorization: Bearer $PTOKEN" "https://api.up42.com/projects/$PROJ/jobs" | jq '.' > jobs_$PROJ.json
+curl -s -L -H "Authorization: Bearer $PTOKEN" "https://api.up42.com/projects/$PROJ/jobs" | jq '.' > jobs_$PROJ.json
 ```
 
 This creates the following
@@ -101,7 +102,7 @@ This creates the following
 To create and run a job you need to get first the workflow IDs. 
 
 ```bash
-WORKFLOW=$(curl -L -s -H "Authorization: Bearer $PTOKEN" "https://api.up42.com/projects/$PROJ/jobs" | jq -j '.data[0] | .workflow.id')
+WORKFLOW=$(curl -s -L -H "Authorization: Bearer $PTOKEN" "https://api.up42.com/projects/$PROJ/jobs" | jq -j '.data[0] | .workflow.id')
 ```
 
 that returns a single element, since there is only one workflow for this
@@ -196,7 +197,7 @@ containing all the job information.
 Now filter the previous request to get the job status.
 
 ```bash
-curl -L -s -H "Authorization: Bearer $PTOKEN" "https://api.up42.com/projects/$PROJ/jobs/96b4c117-ab4d-44cf-afb1-0922d91031d4" | jq -r '.data.status'
+curl -s -L -H "Authorization: Bearer $PTOKEN" "https://api.up42.com/projects/$PROJ/jobs/96b4c117-ab4d-44cf-afb1-0922d91031d4" | jq -r '.data.status'
 ```
 In this case it returns:
 
@@ -327,7 +328,7 @@ returning the following [file](https://gist.github.com/perusio/f9407da92c65a1bcb
 ##### First task results: tarball
 
 ```bash
-curl -s -H "Authorization: Bearer $PTOKEN" -o output_$TASK1.tar.gz "$TASK1_URL/outputs/directory"
+curl -s -L -H "Authorization: Bearer $PTOKEN" -o output_$TASK1.tar.gz "$TASK1_URL/outputs/directory"
 
 ```
 
@@ -347,7 +348,7 @@ you can see the resulting Landsat 8 GeoTIFF image there.
 
 
 ```bash
- curl -s -H "Authorization: Bearer $PTOKEN" "$TASK2_URL/outputs/data-json" | jq '.' > output_task-$TASK2.json
+ curl -s -L -H "Authorization: Bearer $PTOKEN" "$TASK2_URL/outputs/data-json" | jq '.' > output_task-$TASK2.json
 ```
 
 This will be the same GeoJSON as we got above for the job
@@ -360,7 +361,7 @@ are the same, as you can confirm in this [gist](96b4c117-ab4d-44cf-afb1-0922d910
 Similarly for the tarball:
 
 ```bash
-curl -s -H "Authorization: Bearer $PTOKEN" -o output_task-$TASK2.tar.gz "$TASK2_URL/outputs/directory"
+curl -s -L -H "Authorization: Bearer $PTOKEN" -o output_task-$TASK2.tar.gz "$TASK2_URL/outputs/directory"
 ```
 
 ```bash
@@ -541,7 +542,7 @@ where we have the fields given when creating the workflow resource
 Now issuing the request:
 
 ```bash
-curl -L -s -X PUT -H "Authorization: Bearer $PTOKEN" -H 'Content-Type: application/json' "$URL_WORKFLOWS/$NEW_WORKFLOW" -d @create_task1_workflow-ce6f6b93-f227-42d8-b998-a043762c8c5c.json | jq '.' > workflow_task1_created-$NEW_WORKFLOW.json
+curl -s -L -X PUT -H "Authorization: Bearer $PTOKEN" -H 'Content-Type: application/json' "$URL_WORKFLOWS/$NEW_WORKFLOW" -d @create_task1_workflow-ce6f6b93-f227-42d8-b998-a043762c8c5c.json | jq '.' > workflow_task1_created-$NEW_WORKFLOW.json
 ```
 
 generates the [response body](https://gist.github.com/perusio/d544bfc158035c483867fa74a9697ef8).
@@ -594,7 +595,7 @@ in the response body.
 Now querying the workflow endpoint:
 
 ```bash
-curl -L -s -H "Authorization: Bearer $PTOKEN" -H 'Content-Type: application/json' "$URL_WORKFLOWS/$NEW_WORKFLOW" | jq '.' > workflow-$NEW_WORKFLOW.json
+curl -s -L -H "Authorization: Bearer $PTOKEN" -H 'Content-Type: application/json' "$URL_WORKFLOWS/$NEW_WORKFLOW" | jq '.' > workflow-$NEW_WORKFLOW.json
 ```
 
 and comparing the current output with the
