@@ -3,7 +3,7 @@
 ## Preamble
 
 This walktrough is just a scratchpad for the official [UP42](up42.com)
-[documentation site.](https://docs.up42.com). Always refer to that
+[documentation site](https://docs.up42.com). Always refer to that
 site for the currently officialy supported API endpoints. It may
 appear here API features that are not yet official or that are a work
 in progress.
@@ -52,6 +52,9 @@ used in this guide.
 All output is given as Github
 [gists](https://help.github.com/en/articles/creating-gists#about-gists)
 linked below as they are returned by the API.
+
+The required inputs (request body) are in the `inputs` directory and the returned
+outputs (response body) are in the `outputs` directory.
 
 ## Authentication: getting the token
 
