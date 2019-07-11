@@ -247,7 +247,7 @@ curl -s -L -H "Authorization: Bearer $PTOKEN" "$OUTPUT_URL/data-json"  | jq '.' 
 Produces this [output](https://gist.github.com/perusio/4597361dc4792dfdda8a7260b39e9baf).
 
 
-### Get the results: tarball
+#### Get the results: tarball
 
 ```bash
 curl -s -L -H "Authorization: Bearer $PTOKEN" -o output-$JOB.tar.gz "$OUTPUT_URL/directory"
@@ -313,7 +313,7 @@ TASK2=$(cat jobs_job-$JOB.json | jq -j '.data.tasks[1] | .id')
 Now with the individual tasks IDs let us proceed to get the
 respective results.
 
-##### First task results: GeoJSON
+#### First task results: GeoJSON
 
 The first task is the Landsat 8 data acquisition. The output GeoJSON
 is:
@@ -323,7 +323,6 @@ curl -s -L -H "Authorization: Bearer $PTOKEN" "$TASK1_URL/outputs/data-json" | j
 ```
 
 returning the following [file](https://gist.github.com/perusio/f9407da92c65a1bcb76621b658185ad6).
-
 
 ##### First task results: tarball
 
@@ -344,7 +343,7 @@ drwxrwxrwx  0 root   root        0 Jul  3 00:23 output
 
 you can see the resulting Landsat 8 GeoTIFF image there.
 
-##### Second task results: GeoJSON
+#### Second task results: GeoJSON
 
 
 ```bash
@@ -356,7 +355,7 @@ results. They may look sintatically different, but semantically they
 are the same, as you can confirm in this [gist](96b4c117-ab4d-44cf-afb1-0922d91031d4).
 
 
-##### Second task results: tarball
+#### Second task results: tarball
 
 Similarly for the tarball:
 
