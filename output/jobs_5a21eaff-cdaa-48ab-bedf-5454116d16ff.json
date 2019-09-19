@@ -1,0 +1,429 @@
+{
+  "error": null,
+  "data": [
+    {
+      "id": "96b4c117-ab4d-44cf-afb1-0922d91031d4",
+      "displayId": "96b4c117",
+      "createdAt": "2019-07-02T22:21:26.877Z",
+      "updatedAt": "2019-07-02T22:39:26.190Z",
+      "status": "SUCCEEDED",
+      "name": null,
+      "startedAt": "2019-07-02T22:21:27Z",
+      "finishedAt": "2019-07-02T22:39:25Z",
+      "inputs": {
+        "land_cover_classification:1": {
+          "n_clusters": 6,
+          "n_iterations": 10,
+          "n_sieve_pixels": 64
+        },
+        "sentinelhub-landsat8-aoiclipped:1": {
+          "bbox": null,
+          "time": null,
+          "limit": 1,
+          "intersects": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -8.877645,
+                  40.152078
+                ],
+                [
+                  -8.871337,
+                  40.139659
+                ],
+                [
+                  -8.849105,
+                  40.141048
+                ],
+                [
+                  -8.860468,
+                  40.152447
+                ],
+                [
+                  -8.877645,
+                  40.152078
+                ]
+              ]
+            ]
+          },
+          "zoom_level": 17
+        }
+      },
+      "mode": "DEFAULT",
+      "workflowId": "21415975-390f-4215-becb-8d46aaf5156c",
+      "workflowName": "Land cover + landsat8"
+    },
+    {
+      "id": "eb9ed37e-eb87-439c-a5f7-6a1eccf5c68b",
+      "displayId": "eb9ed37e",
+      "createdAt": "2019-06-28T11:53:27.063Z",
+      "updatedAt": "2019-06-28T12:21:52.185Z",
+      "status": "SUCCEEDED",
+      "name": null,
+      "startedAt": "2019-06-28T11:53:27Z",
+      "finishedAt": "2019-06-28T12:21:51Z",
+      "inputs": {
+        "land_cover_classification:1": {
+          "n_clusters": 6,
+          "n_iterations": 10,
+          "n_sieve_pixels": 64
+        },
+        "sentinelhub-landsat8-aoiclipped:1": {
+          "bbox": null,
+          "time": null,
+          "limit": 1,
+          "intersects": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -8.877645,
+                  40.152078
+                ],
+                [
+                  -8.871337,
+                  40.139659
+                ],
+                [
+                  -8.849105,
+                  40.141048
+                ],
+                [
+                  -8.860468,
+                  40.152447
+                ],
+                [
+                  -8.877645,
+                  40.152078
+                ]
+              ]
+            ]
+          },
+          "zoom_level": 17
+        }
+      },
+      "mode": "DEFAULT",
+      "workflowId": "21415975-390f-4215-becb-8d46aaf5156c",
+      "workflowName": "Land cover + landsat8"
+    },
+    {
+      "id": "e5a4b9ba-4ad7-4ba3-a95c-cd7c1bb39661",
+      "displayId": "e5a4b9ba",
+      "createdAt": "2019-06-28T11:48:50.675Z",
+      "updatedAt": "2019-06-28T12:09:37.391Z",
+      "status": "SUCCEEDED",
+      "name": null,
+      "startedAt": "2019-06-28T11:48:51Z",
+      "finishedAt": "2019-06-28T12:09:37Z",
+      "inputs": {
+        "land_cover_classification:1": {
+          "n_clusters": 6,
+          "n_iterations": 10,
+          "n_sieve_pixels": 64
+        },
+        "sentinelhub-landsat8-aoiclipped:1": {
+          "bbox": null,
+          "time": null,
+          "limit": 1,
+          "intersects": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -8.877645,
+                  40.152078
+                ],
+                [
+                  -8.871337,
+                  40.139659
+                ],
+                [
+                  -8.849105,
+                  40.141048
+                ],
+                [
+                  -8.860468,
+                  40.152447
+                ],
+                [
+                  -8.877645,
+                  40.152078
+                ]
+              ]
+            ]
+          },
+          "zoom_level": 17
+        }
+      },
+      "mode": "DEFAULT",
+      "workflowId": "21415975-390f-4215-becb-8d46aaf5156c",
+      "workflowName": "Land cover + landsat8"
+    },
+    {
+      "id": "af0cfabc-fe81-405f-ae32-7478eba97ee6",
+      "displayId": "af0cfabc",
+      "createdAt": "2019-06-28T11:47:44.404Z",
+      "updatedAt": "2019-06-28T12:07:47.952Z",
+      "status": "SUCCEEDED",
+      "name": null,
+      "startedAt": "2019-06-28T11:47:44Z",
+      "finishedAt": "2019-06-28T12:07:47Z",
+      "inputs": {
+        "land_cover_classification:1": {
+          "n_clusters": 6,
+          "n_iterations": 10,
+          "n_sieve_pixels": 64
+        },
+        "sentinelhub-landsat8-aoiclipped:1": {
+          "bbox": null,
+          "time": null,
+          "limit": 1,
+          "intersects": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -8.877645,
+                  40.152078
+                ],
+                [
+                  -8.871337,
+                  40.139659
+                ],
+                [
+                  -8.849105,
+                  40.141048
+                ],
+                [
+                  -8.860468,
+                  40.152447
+                ],
+                [
+                  -8.877645,
+                  40.152078
+                ]
+              ]
+            ]
+          },
+          "zoom_level": 17
+        }
+      },
+      "mode": "DEFAULT",
+      "workflowId": "21415975-390f-4215-becb-8d46aaf5156c",
+      "workflowName": "Land cover + landsat8"
+    },
+    {
+      "id": "e58a7278-2b7e-4b15-ac89-cf02db7bee26",
+      "displayId": "e58a7278",
+      "createdAt": "2019-06-28T11:46:20.613Z",
+      "updatedAt": "2019-06-28T11:47:32.239Z",
+      "status": "CANCELLED",
+      "name": null,
+      "startedAt": "2019-06-28T11:46:20Z",
+      "finishedAt": "2019-06-28T11:47:31Z",
+      "inputs": {
+        "land_cover_classification:1": {
+          "n_clusters": 6,
+          "n_iterations": 10,
+          "n_sieve_pixels": 64
+        },
+        "sentinelhub-landsat8-aoiclipped:1": {
+          "bbox": null,
+          "time": null,
+          "limit": 1,
+          "intersects": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -8.877645,
+                  40.152078
+                ],
+                [
+                  -8.871337,
+                  40.139659
+                ],
+                [
+                  -8.849105,
+                  40.141048
+                ],
+                [
+                  -8.860468,
+                  40.152447
+                ],
+                [
+                  -8.877645,
+                  40.152078
+                ]
+              ]
+            ]
+          },
+          "zoom_level": 17
+        }
+      },
+      "mode": "DEFAULT",
+      "workflowId": "21415975-390f-4215-becb-8d46aaf5156c",
+      "workflowName": "Land cover + landsat8"
+    },
+    {
+      "id": "b92dad3f-1a0f-4272-aadc-68ef260874d5",
+      "displayId": "b92dad3f",
+      "createdAt": "2019-06-28T11:31:37.443Z",
+      "updatedAt": "2019-06-28T11:48:31.591Z",
+      "status": "SUCCEEDED",
+      "name": null,
+      "startedAt": "2019-06-28T11:31:37Z",
+      "finishedAt": "2019-06-28T11:48:31Z",
+      "inputs": {
+        "land_cover_classification:1": {
+          "n_clusters": 6,
+          "n_iterations": 10,
+          "n_sieve_pixels": 64
+        },
+        "sentinelhub-landsat8-aoiclipped:1": {
+          "bbox": null,
+          "time": null,
+          "limit": 1,
+          "intersects": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -8.877645,
+                  40.152078
+                ],
+                [
+                  -8.871337,
+                  40.139659
+                ],
+                [
+                  -8.849105,
+                  40.141048
+                ],
+                [
+                  -8.860468,
+                  40.152447
+                ],
+                [
+                  -8.877645,
+                  40.152078
+                ]
+              ]
+            ]
+          },
+          "zoom_level": 17
+        }
+      },
+      "mode": "DEFAULT",
+      "workflowId": "21415975-390f-4215-becb-8d46aaf5156c",
+      "workflowName": "Land cover + landsat8"
+    },
+    {
+      "id": "22bbc2e9-09c4-4311-a4ed-96b2d505f5f0",
+      "displayId": "22bbc2e9",
+      "createdAt": "2019-06-28T11:30:43.014Z",
+      "updatedAt": "2019-06-28T11:48:32.166Z",
+      "status": "SUCCEEDED",
+      "name": null,
+      "startedAt": "2019-06-28T11:30:43Z",
+      "finishedAt": "2019-06-28T11:48:32Z",
+      "inputs": {
+        "land_cover_classification:1": {
+          "n_clusters": 6,
+          "n_iterations": 10,
+          "n_sieve_pixels": 64
+        },
+        "sentinelhub-landsat8-aoiclipped:1": {
+          "bbox": null,
+          "time": null,
+          "limit": 1,
+          "intersects": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -8.877645,
+                  40.152078
+                ],
+                [
+                  -8.871337,
+                  40.139659
+                ],
+                [
+                  -8.849105,
+                  40.141048
+                ],
+                [
+                  -8.860468,
+                  40.152447
+                ],
+                [
+                  -8.877645,
+                  40.152078
+                ]
+              ]
+            ]
+          },
+          "zoom_level": 17
+        }
+      },
+      "mode": "DEFAULT",
+      "workflowId": "21415975-390f-4215-becb-8d46aaf5156c",
+      "workflowName": "Land cover + landsat8"
+    },
+    {
+      "id": "eecb3ac2-ad8a-4f66-8e50-b81cdb40ff0b",
+      "displayId": "eecb3ac2",
+      "createdAt": "2019-05-16T14:06:50.954Z",
+      "updatedAt": "2019-05-23T09:44:00.601Z",
+      "status": "SUCCEEDED",
+      "name": null,
+      "startedAt": "2019-05-16T14:06:51Z",
+      "finishedAt": "2019-05-16T14:32:18Z",
+      "inputs": {
+        "land_cover_classification:1": {
+          "n_clusters": 6,
+          "n_iterations": 10,
+          "n_sieve_pixels": 64
+        },
+        "sentinelhub-landsat8-aoiclipped:1": {
+          "bbox": null,
+          "time": null,
+          "limit": 1,
+          "intersects": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  -8.877645,
+                  40.152078
+                ],
+                [
+                  -8.871337,
+                  40.139659
+                ],
+                [
+                  -8.849105,
+                  40.141048
+                ],
+                [
+                  -8.860468,
+                  40.152447
+                ],
+                [
+                  -8.877645,
+                  40.152078
+                ]
+              ]
+            ]
+          },
+          "zoom_level": 17
+        }
+      },
+      "mode": "DEFAULT",
+      "workflowId": "21415975-390f-4215-becb-8d46aaf5156c",
+      "workflowName": "Land cover + landsat8"
+    }
+  ]
+}

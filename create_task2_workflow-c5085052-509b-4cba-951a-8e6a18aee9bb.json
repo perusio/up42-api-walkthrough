@@ -1,0 +1,12 @@
+[
+    {
+      "name": "First task Landsat 8 AOI clipped data block",
+      "parentName": null,
+      "blockName": "sentinelhub-landsat8-aoiclipped"
+    },
+   {
+     "name": "land-cover-classification",
+     "parentName": "First task Landsat 8 AOI clipped data block",
+     "blockName": "land-cover-classification"
+   }
+]
