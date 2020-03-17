@@ -1,7 +1,6 @@
 {
+  "name": "My brand new workflow with Pléaides and Pansharpening.",
+  "description": "This workflow is for getting Pansharpened images with all the bands from Pléiades.",
   "id": null,
-  "name": "Create a new landsat 8 + Land cover workflow",
-  "description": "Just trying out workflow creation",
-  "projectId": "5a21eaff-cdaa-48ab-bedf-5454116d16ff",
   "tasks": []
 }
